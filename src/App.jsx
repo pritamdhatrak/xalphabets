@@ -6,12 +6,10 @@ export default function App() {
   const [text, setText] = useState("");
 
   const handleClick = (char) => {
-    console.log("Clicked:", char);
     setText((prev) => prev + char);
   };
 
   const handleBackspace = () => {
-    console.log("Backspace clicked");
     setText((prev) => prev.slice(0, -1));
   };
 
@@ -34,7 +32,7 @@ export default function App() {
             border: "1px solid #ccc",
             marginBottom: "1rem",
             boxSizing: "border-box",
-            color: "black",
+            color: text ? "black" : "#999",
             backgroundColor: "white",
             whiteSpace: "pre-wrap",
             wordBreak: "break-word",
@@ -42,7 +40,7 @@ export default function App() {
           }}
           aria-label="output"
         >
-          {text || "Your text will appear here..."}
+          {text.length > 0 ? text : "Your text will appear here..."}
         </div>
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1rem" }}>
           <button
