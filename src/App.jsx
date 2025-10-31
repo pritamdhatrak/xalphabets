@@ -1,36 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export default function App() {
   const [text, setText] = useState("");
 
-  // Handle alphabet button click
   const handleAlphabetClick = (char) => {
     setText((prev) => prev + char);
   };
 
-  // Handle backspace button click
   const handleBackspace = () => {
     setText((prev) => prev.slice(0, -1));
   };
 
-  // Optional: handle physical keyboard input for alphabets and backspace
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      const key = event.key.toUpperCase();
-      if (alphabets.includes(key)) {
-        setText((prev) => prev + key);
-      } else if (event.key === "Backspace") {
-        setText((prev) => prev.slice(0, -1));
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
   return (
-    <div className="container" style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
+    <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
       <h2 style={{ textAlign: "center" }}>Alphabet Buttons</h2>
       <p style={{ textAlign: "center", fontSize: "0.9rem", marginTop: "-1rem", marginBottom: "1rem" }}>
         Click letters (or use your keyboard) to build text.
@@ -42,6 +26,7 @@ export default function App() {
           placeholder="Your text will appear here..."
           value={text}
           readOnly
+          data-testid="output"
           style={{
             width: "100%",
             padding: "0.5rem",
@@ -53,14 +38,13 @@ export default function App() {
             color: "black",
             backgroundColor: "white"
           }}
-          data-testid="output"
         />
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1rem" }}>
           <button
             className="key"
             onClick={handleBackspace}
-            style={{ padding: "0.3rem 0.8rem", fontSize: "0.9rem", cursor: "pointer" }}
             data-testid="backspace"
+            style={{ padding: "0.3rem 0.8rem", fontSize: "0.9rem", cursor: "pointer" }}
           >
             Backspace
           </button>
@@ -71,6 +55,7 @@ export default function App() {
               key={char}
               className="key"
               onClick={() => handleAlphabetClick(char)}
+              data-testid={`key-${char}`}
               style={{
                 padding: "0.5rem",
                 fontWeight: "bold",
@@ -81,7 +66,6 @@ export default function App() {
                 userSelect: "none",
                 color: "black"
               }}
-              data-testid={`key-${char}`}
             >
               {char}
             </button>
