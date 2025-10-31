@@ -5,12 +5,14 @@ const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 export default function App() {
   const [text, setText] = useState("");
 
-  const handleClick = (char) => {
-    setText((prev) => prev + char);
+  // Append clicked letter to text
+  const onClickLetter = (char) => {
+    setText(text + char);
   };
 
-  const handleBackspace = () => {
-    setText((prev) => prev.slice(0, -1));
+  // Remove last character on backspace
+  const onClickBackspace = () => {
+    setText(text.slice(0, -1));
   };
 
   return (
@@ -40,12 +42,12 @@ export default function App() {
           }}
           aria-label="output"
         >
-          {text}
+          {text || ""}
         </div>
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1rem" }}>
           <button
             className="key"
-            onClick={handleBackspace}
+            onClick={onClickBackspace}
             data-testid="backspace"
             style={{ padding: "0.3rem 0.8rem", fontSize: "0.9rem", cursor: "pointer" }}
           >
@@ -57,7 +59,7 @@ export default function App() {
             <button
               key={char}
               className="key"
-              onClick={() => handleClick(char)}
+              onClick={() => onClickLetter(char)}
               data-testid={`key-${char}`}
               style={{
                 padding: "0.5rem",
