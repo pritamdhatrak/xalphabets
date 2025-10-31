@@ -6,11 +6,11 @@ export default function App() {
   const [text, setText] = useState("");
 
   const handleClick = (char) => {
-    setText((prev) => prev + char);
+    setText(prev => prev + char);
   };
 
   const handleBackspace = () => {
-    setText((prev) => prev.slice(0, -1));
+    setText(prev => prev.slice(0, -1));
   };
 
   return (
