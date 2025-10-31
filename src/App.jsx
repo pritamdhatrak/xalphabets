@@ -20,15 +20,12 @@ export default function App() {
         Click letters (or use your keyboard) to build text.
       </p>
       <div style={{ maxWidth: "600px", margin: "0 auto", background: "#fff", padding: "1rem", borderRadius: "8px", boxShadow: "0 0 10px #ccc" }}>
-        <input
-          type="text"
+        <div
           className="output"
-          placeholder="Your text will appear here..."
-          value={text}
-          readOnly
           data-testid="output"
           style={{
             width: "100%",
+            minHeight: "2rem",
             padding: "0.5rem",
             fontSize: "1rem",
             borderRadius: "4px",
@@ -36,9 +33,15 @@ export default function App() {
             marginBottom: "1rem",
             boxSizing: "border-box",
             color: "black",
-            backgroundColor: "white"
+            backgroundColor: "white",
+            whiteSpace: "pre-wrap",
+            wordBreak: "break-word",
+            userSelect: "text"
           }}
-        />
+          aria-label="output"
+        >
+          {text || "Your text will appear here..."}
+        </div>
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1rem" }}>
           <button
             className="key"
