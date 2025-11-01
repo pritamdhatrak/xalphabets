@@ -54,8 +54,8 @@ export default function App() {
             <button
               key={char}
               className="key"
-              onClick={() => handleClick(char)}
               data-testid={`key-${char}`}
+              onClick={() => handleClick(char)}
               style={{
                 padding: "0.5rem",
                 fontWeight: "bold",
